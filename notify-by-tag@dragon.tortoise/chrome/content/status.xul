@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<overlay id="status" 
+xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+ <script type="application/javascript"
+ src="chrome://notify-by-tag/content/status.js"/><!-- A reference to your JavaScript file -->
+  <statusbar id="status-bar">
+    <statusbarpanel id="query-status-panel" label="query status"/>
+  </statusbar>
+</overlay>
+
+

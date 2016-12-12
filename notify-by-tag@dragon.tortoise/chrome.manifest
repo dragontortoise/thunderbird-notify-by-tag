@@ -1,0 +1,5 @@
+content notify-by-tag chrome/content/notify-by-tag.xul
+
+overlay chrome://messenger/content/messenger.xul chrome://notify-by-tag/content/status.xul
+
+overlay chrome://messenger/content/messenger.xul chrome://notify-by-tag/content/tools_menu.xul
