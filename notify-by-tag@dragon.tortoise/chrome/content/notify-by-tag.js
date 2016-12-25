@@ -54,16 +54,23 @@ function nbt_dumpObj(obj, name, indent, depth) {
 }
 
 /*
- * This function save email subject, email author and email recipients
+ * This function saves email subject, email author and email recipients
  * (email addresses in to: field) into file.
+ *
+ * Each line in the file is a text representation of a JSON object.
+ * All JSON objects in text representation are separated by newline
+ * character.
  */
 function nbt_run() {
   // Get data from the current selected message.
   let selectednsIMsgDBHdr = gFolderDisplay.selectedMessage;
-  let data = selectednsIMsgDBHdr.mime2DecodedSubject +
-    ', ' + selectednsIMsgDBHdr.mime2DecodedAuthor +
-    ', ' + selectednsIMsgDBHdr.mime2DecodedRecipients +
-    '\n';
+  // Use JSON format.
+  let dataObj =
+    {"subject" : selectednsIMsgDBHdr.mime2DecodedSubject,
+     "author"  : selectednsIMsgDBHdr.mime2DecodedAuthor,
+     "recipients": selectednsIMsgDBHdr.mime2DecodedRecipients 
+    };
+  let dataTxt = JSON.stringify(dataObj);
 
   // [begin] write data into a file
   //
@@ -79,7 +86,7 @@ function nbt_run() {
   let file = "/home/ubuntu/tmp/nbt-data";
   OS.File.open(file, {write: true, append: true}).then(valOpen => {
     consoleService.logStringMessage('valOpen:', valOpen);
-    let txtEncoded = new TextEncoder().encode(data);
+    let txtEncoded = new TextEncoder().encode(dataTxt + '\n');
     valOpen.write(txtEncoded).then(valWrite => {
         consoleService.logStringMessage('valWrite');
         valOpen.close().then(valClose => {
