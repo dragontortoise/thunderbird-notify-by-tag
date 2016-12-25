@@ -133,7 +133,7 @@ related to the tag.
 
 - readme.md : The readme file you are reading right now.
 
-- notify-by-tag\@dragon.tortoise/ : This directory is created and named
+- notify-by-tag&#64;dragon.tortoise/ : This directory is created and named
   according to Thunderbird Extension.  I name the extension as
   "notify-by-tag".  And I have to put my First Name and Last Name in
   this format "project-name@first\_name.last\_name".
