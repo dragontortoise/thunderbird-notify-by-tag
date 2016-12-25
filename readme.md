@@ -1,6 +1,7 @@
 vim: syntax=markdown
 
 Project Name: thunderbird-notify-by-tag
+
 Thunderbird Extension Name: notify-by-tag
 
 # Purpose
