@@ -1,13 +1,14 @@
 <?xml version="1.0"?>
 <overlay id="tools_menu" 
 xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+  <script type="application/javascript"
+    src="chrome://notify-by-tag/content/notify-by-tag.js" />
 
   <menupopup id="taskPopup">
     <menuitem id="notify-by-tag-menuItem"
-      oncommand="window.open('chrome://notify-by-tag/content/notify-by-tag.xul', 'notify-by-tag', 'chrome,width=600,height=300')"
+      oncommand="nbt_run()"
       label="notify-by-tag" accesskey="n" />
   </menupopup>
 
 </overlay>
-
 

@@ -1,22 +1,40 @@
-Components.utils.import("resource:///modules/virtualFolderWrapper.js");
-Components.utils.import("resource://gre/modules/iteratorUtils.jsm");
+/*
+ * I don't know how to use namespace in JavaScript.  Let's use "nbt" as
+ * a prefix for each function.  "nbt" stands for Notify By Tag.
+ */
+ 
+// [begin] Import statements.
 
-Components.utils.import("resource:///modules/gloda/public.js");
+// library for writing data into files
+Components.utils.import("resource://gre/modules/osfile.jsm")
 
-// http://geekswithblogs.net/svanvliet/archive/2006/03/23/simple-javasc
-// ript-object-dump-function.aspx
-var MAX_DUMP_DEPTH = 10;
-function dumpObj(obj, name, indent, depth) {
-  if (depth > MAX_DUMP_DEPTH) {
+// Library to write log which you can read from Thunderbird's Error
+// Console.
+let consoleService = Components.classes["@mozilla.org/consoleservice;1"]
+  .getService(Components.interfaces.nsIConsoleService);
+
+// [end] Import statements.
+
+// Dump JavaScript object.  This function is useful when we need to
+// hack object in JavaScript.  Some times it is convenient to
+// recursively dump all objects inside a specified object to see data
+// inside in plaintext.
+//
+// References:
+//   - http://geekswithblogs.net/svanvliet/archive/2006/03/23/simple-ja
+//     vascript-object-dump-function.aspx
+let NBT_MAX_DUMP_DEPTH = 10;
+function nbt_dumpObj(obj, name, indent, depth) {
+  if (depth > NBT_MAX_DUMP_DEPTH) {
     return indent + name + ": <Maximum Depth Reached>\n";
   }
 
   if (typeof obj == "object") {
-    var child = null;
-    var output = indent + name + "\n";
+    let child = null;
+    let output = indent + name + "\n";
     indent += "\t";
 
-    for (var item in obj) {
+    for (let item in obj) {
       try {
         child = obj[item];
       } catch (e) {
@@ -36,56 +54,40 @@ function dumpObj(obj, name, indent, depth) {
 }
 
 /*
- * I don't know how to use namespace in JavaScript.  Let's use "nbt" as
- * a prefix for each function.  "nbt" stands for Notify By Tag.
+ * This function save email subject, email author and email recipients
+ * (email addresses in to: field) into file.
  */
 function nbt_run() {
-  var output = document.getElementById('output');
+  // Get data from the current selected message.
+  let selectednsIMsgDBHdr = gFolderDisplay.selectedMessage;
+  let data = selectednsIMsgDBHdr.mime2DecodedSubject +
+    ', ' + selectednsIMsgDBHdr.mime2DecodedAuthor +
+    ', ' + selectednsIMsgDBHdr.mime2DecodedRecipients +
+    '\n';
 
-  output.value = '555';
+  // [begin] write data into a file
+  //
+  // references
+  //   - https://developer.mozilla.org/en-US/docs/Mozilla/JavaScript_co
+  //     de_modules/OSFile.jsm/OS.File_for_the_main_thread#OS.File.writ
+  //     eAtomic
 
-  
-  let query = Gloda.newQuery(Gloda.NOUN_MESSAGE);
+  // We have to encode string before writing into a file.
+  // This encoder can be reused for several writes.
+  let encoder = new TextEncoder();  
 
-  query.folder(
-    MailUtils.getFolderForURI(
-      'mailbox://nobody@Local%20Folders/Expecting_Reply', true)
-  );
-
-
-  let myListener = {
-    /* called when new items are returned by the database query or
-    freshly indexed */
-    onItemsAdded: function myListener_onItemsAdded(aItems, aCollection) {
-    },
-    /* called when items that are already in our collection get
-    re-indexed */
-    onItemsModified: function myListener_onItemsModified(aItems,
-      aCollection) {
-    },
-    /* called when items that are in our collection are purged from the
-    system */
-    onItemsRemoved: function myListener_onItemsRemoved(aItems,
-      aCollection) {
-    },
-    /* called when our database query completes */
-    onQueryCompleted: function myListener_onQueryCompleted(aCollection)
-    {
-      let items = aCollection.items;
-      let data = {
-        messages: [],
-      };
-      for each (let [, glodaMsg] in Iterator(items)) {
-        alert(glodaMsg.subject + ', ' + glodaMsg.from.value +
-          ', ' + glodaMsg.to[0] + ', ' + glodaMsg.date);
-        /*data.messages.push({
-          subject: glodaMsg.subject,
-          date: glodaMsg.date,
-          author: glodaMsg.from.value,
-        });*/
-      };
-    }
-  };
-
-  let collection = query.getCollection(myListener);
+  let file = "/home/ubuntu/tmp/nbt-data";
+  OS.File.open(file, {write: true, append: true}).then(valOpen => {
+    consoleService.logStringMessage('valOpen:', valOpen);
+    let txtEncoded = new TextEncoder().encode(data);
+    valOpen.write(txtEncoded).then(valWrite => {
+        consoleService.logStringMessage('valWrite');
+        valOpen.close().then(valClose => {
+            consoleService.logStringMessage('valClose');
+            consoleService.logStringMessage('successfully appended');
+        });
+    });
+  });
+  // [end] write data into a file
 }
+
