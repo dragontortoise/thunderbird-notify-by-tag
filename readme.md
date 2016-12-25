@@ -18,6 +18,7 @@ converstation tree.  The tree has its limit.  If there are too many
 items in the tree, it looks bad.  For example, this is what happens
 with my Thunderbird when there are too many items in the tree:
 
+~~~
   Some Email
   |- Re: Some Email
       |- Re: Some Email
@@ -33,6 +34,7 @@ with my Thunderbird when there are too many items in the tree:
                                   |- Re: Some Email
                                   |- Re: Some Email
                                   |- Re: Some Email
+~~~
 
 At some point, Thunderbird will not indent it anymore as there are not
 enough space horizontally.
@@ -63,6 +65,27 @@ enough space horizontally.
   |- chrome/ : This directory contains all the GUI (XUL) files and
     Program Logic (JavaScript) files.
 
+# Install
+
+There are several different ways to install Thunderbird Extension.
+I will show you a simple way in Linux.
+
+- git clone git@github.com:dragontortoise/thunderbird-notify-by-tag.git
+  or
+  git clone https://github.com/dragontortoise/thunderbird-notify-by-tag.git
+
+- Go to your Thunderbird extension directory in your Thunderbird
+  Profile.  For example, ~/.thunderbird/sihe8lo0.default/extensions/ .
+
+- Create a text file named notify-by-tag@dragon.tortoise .
+
+- In this text file, you put a path to thunderbird-notify-by-tag source
+  code.  For example,
+
+  ~/thunderbird-notify-by-tag/notify-by-tag@dragon.tortoise
+
+- Open Thunderbird and you are ready!  You can open GUI of
+  thunderbird-notify-by-tag from Tools menu (Tools -> notify-by-tag).
 
 References
 
@@ -73,3 +96,6 @@ References
 - https://developer.mozilla.org/en-US/docs/Mozilla/Tech/XUL/Tutorial/XUL_Structure
 - https://developer.mozilla.org/en-US/docs/Mozilla/Tech/XUL/XUL_Reference
 - http://kb.mozillazine.org/Adding_items_to_menus
+- https://dxr.mozilla.org/comm-central/source/
+- https://developer.mozilla.org/en-US/docs/Mozilla/Tech/XPCOM/Reference/Interface/nsIMsgFolder
+- https://developer.mozilla.org/en-US/Add-ons/Thunderbird/HowTos/Folders_and_message_lists#Interacting_With_the_Current_Folder
