@@ -34,7 +34,7 @@ Some Email
                                |- Re: Some Email
 ~~~
 
-I think follow up email should not be in the converstation tree.
+I think follow up email should not be in the conversation tree.
 
 For each sent email I expect to be replied, I manually tag them with a
 custom tag I created, 'Expecting Reply'.  I then have a Saved Search
@@ -133,7 +133,7 @@ related to the tag.
 
 - readme.md : The readme file you are reading right now.
 
-- notify-by-tag@dragon.tortoise/ : This directory is created and named
+- notify-by-tag\@dragon.tortoise/ : This directory is created and named
   according to Thunderbird Extension.  I name the extension as
   "notify-by-tag".  And I have to put my First Name and Last Name in
   this format "project-name@first\_name.last\_name".
@@ -173,12 +173,13 @@ I will show you a simple way in Linux.
 
 Assuming your Thunderbird Profile directory is:
 
-  ~/.thunderbird/sihe8lo0.default
+  `~/.thunderbird/sihe8lo0.default`
 
 ~~~
 % pushd ~/.thunderbird/sihe8lo0.default/extensions/
 % cat > notify-by-tag@dragon.tortoise
-~/projects/thunderbird-notify-by-tag/notify-by-tag@dragon.tortoise
+~/project/thunderbird-notify-by-tag/notify-by-tag@dragon.tortoise
+% popd
 ~~~
 
 Open Thunderbird and you are ready!  You should notice
@@ -202,12 +203,12 @@ FIXME
 
 References
 
-- https://developer.mozilla.org/en-US/Add-ons/Thunderbird/Building\_a\_Thunderbird\_extension (shorten url: https://goo.gl/46VwA4 )
+- https://developer.mozilla.org/en-US/Add-ons/Thunderbird/Building_a_Thunderbird_extension
 - https://developer.mozilla.org/en-US/Add-ons/Thunderbird
 - https://github.com/protz/thunderbird-stdlib
-- https://developer.mozilla.org/en-US/docs/Mozilla/Tech/XUL/Tutorial/XUL\_Structure
-- https://developer.mozilla.org/en-US/docs/Mozilla/Tech/XUL/XUL\_Reference
-- http://kb.mozillazine.org/Adding\_items\_to\_menus
+- https://developer.mozilla.org/en-US/docs/Mozilla/Tech/XUL/Tutorial/XUL_Structure
+- https://developer.mozilla.org/en-US/docs/Mozilla/Tech/XUL/XUL_Reference
+- http://kb.mozillazine.org/Adding_items_to_menus
 - https://dxr.mozilla.org/comm-central/source/
 - https://developer.mozilla.org/en-US/docs/Mozilla/Tech/XPCOM/Reference/Interface/nsIMsgFolder
-- https://developer.mozilla.org/en-US/Add-ons/Thunderbird/HowTos/Folders\_and\_message\_lists#Interacting\_With\_the\_Current\_Folder
+- https://developer.mozilla.org/en-US/Add-ons/Thunderbird/HowTos/Folders_and_message_lists#Interacting_With_the_Current_Folder
