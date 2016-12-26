@@ -201,7 +201,7 @@ FIXME
 
 - https://addons.mozilla.org/en-US/thunderbird/addon/follow-up/
 
-References
+# References
 
 - https://developer.mozilla.org/en-US/Add-ons/Thunderbird/Building_a_Thunderbird_extension
 - https://developer.mozilla.org/en-US/Add-ons/Thunderbird
