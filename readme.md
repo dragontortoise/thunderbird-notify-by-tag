@@ -111,12 +111,12 @@ Thunderbird -> ~/tmp/nbt-data -> Python Script
 
 *thunderbird-notify-by-tag* or *notify-by-tag* might not be a good name
 for now as I do not seem to code anything related to Tag anymore.  But
-I will keep it as is as if we take into account the example workflow
+I will keep it as is as if we take into account the sample workflow
 I introduce, it is actually related to the 'Expecting Reply' custom tag.
 
 Initially when I started this project, I wanted to developed a
 Thunderbird Add-On which would send follow up emails for each email which
-has the specifiec tag if is left unanswered for at least the specified
+has the specified tag if is left unanswered for at least the specified
 number of days.  It was a pain for me to find out how to develop add-on
 in Thunderbird with JavaScript.  I am new to JavaScript and the whole
 JavaScript environments.  I found it was very difficult to find
