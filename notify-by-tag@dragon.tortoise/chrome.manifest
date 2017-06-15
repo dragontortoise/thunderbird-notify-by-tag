@@ -1,3 +1,2 @@
 content notify-by-tag chrome/content/
 overlay chrome://messenger/content/messenger.xul chrome://notify-by-tag/content/tools_menu.xul
-
