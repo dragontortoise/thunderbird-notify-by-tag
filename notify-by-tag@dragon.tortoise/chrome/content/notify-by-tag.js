@@ -83,7 +83,7 @@ function nbt_run() {
   // This encoder can be reused for several writes.
   let encoder = new TextEncoder();  
 
-  let file = "/home/ubuntu/tmp/nbt-data";
+  let file = "/home/debian/tmp/nbt-data";
   OS.File.open(file, {write: true, append: true}).then(valOpen => {
     consoleService.logStringMessage('valOpen:', valOpen);
     let txtEncoded = new TextEncoder().encode(dataTxt + '\n');
@@ -97,4 +97,3 @@ function nbt_run() {
   });
   // [end] write data into a file
 }
-
