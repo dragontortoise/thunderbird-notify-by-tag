@@ -29,7 +29,7 @@ class TestSendFollwUpEmail(unittest.TestCase):
 
     self.assertEqual(nbtdata['subject'], 'status report - 20170614')
     self.assertEqual(nbtdata['author'],  'Nada <nada@example.com>')
-    self.assertEqual(nbtdata['recipients'], 'status-report@example.com, Kwanjai A <kwanjai@example.com>, \\"Chalo D.\\" <chalod@example.com>"}')
+    self.assertEqual(nbtdata['recipients'], 'status-report@example.com, Kwanjai A <kwanjai@example.com>, "Chalo D." <chalod@example.com>')
 
     nbtdata = send_follow_up_email.parsenbtdata(nbtdata_line_2)
 
