@@ -20,6 +20,11 @@ def grep_emails(input_string):
   # gs-from-large-document
   return re.findall(r'[\w\.-]+@[\w\.-]+', input_string)
 
+def parsenbtdata(nbtdata_line):
+  nbtdata = {'subject' : 'server under maintenance',
+    'author' : ''}
+  return nbtdata
+
 def run():
   """
   myself = ['a@example.com', 'b@example.org']
