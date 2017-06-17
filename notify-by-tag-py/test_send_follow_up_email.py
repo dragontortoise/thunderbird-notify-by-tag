@@ -20,7 +20,7 @@ class TestSendFollwUpEmail(unittest.TestCase):
       'Kwanjai A <kwanjai@example.com>, ' + \
       '\\"Chalo D.\\" <chalod@example.com>"}\n' + \
       '{"subject":"Aug 4 - Aug 7, 30 people",' + \
-      '"author":"Boy Sawd <boy@example.org>",' + \
+      '"author":"Yes <sample@example.com>",' + \
       '"recipients":"Rui Nag <rui.nag@example.com>"}'
 
     return raw
@@ -56,9 +56,17 @@ class TestSendFollwUpEmail(unittest.TestCase):
     nbtdata = send_follow_up_email.parsenbtdata(nbtdata_lines[2])
 
     self.assertEqual(nbtdata['subject'], 'Aug 4 - Aug 7, 30 people')
-    self.assertEqual(nbtdata['author'],  'Boy Sawd <boy@example.org>')
+    self.assertEqual(nbtdata['author'],  'Yes <sample@example.com>')
     self.assertEqual(nbtdata['recipients'],
       'Rui Nag <rui.nag@example.com>')
+
+  def test_can_generate_message_dict(self):
+    raw_nbtdata = self.get_sample_raw_nbtdata_str()
+    msg_dict = send_follow_up_email.generate_message_dict(raw_nbtdata,
+      'sample@example.com')
+
+    self.assertEqual(msg_dict['chalohuan@example.com'],
+      '- server under maintenance\n-Aug 4 - Aug 7, 30 people')
 
 if __name__ == '__main__':
   unittest.main()
