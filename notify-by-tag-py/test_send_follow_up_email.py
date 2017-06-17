@@ -67,6 +67,18 @@ class TestSendFollwUpEmail(unittest.TestCase):
 
     self.assertEqual(msg_dict['chalohuan@example.com'],
       '- server under maintenance\n- Aug 4 - Aug 7, 30 people')
+    self.assertEqual(msg_dict['cart@example.com'],
+      '- server under maintenance')
+    self.assertEqual(msg_dict['nada@example.com'],
+      '- status report - 20170614')
+    self.assertEqual(msg_dict['status-report@example.com'],
+      '- status report - 20170614')
+    self.assertEqual(msg_dict['kwanjai@example.com'],
+      '- status report - 20170614')
+    self.assertEqual(msg_dict['chalod@example.com'],
+      '- status report - 20170614')
+    self.assertEqual(msg_dict['rui.nag@example.com'],
+      '- Aug 4 - Aug 7, 30 people')
 
 if __name__ == '__main__':
   unittest.main()
