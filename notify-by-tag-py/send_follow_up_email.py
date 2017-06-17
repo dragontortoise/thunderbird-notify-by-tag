@@ -31,6 +31,16 @@ def parsenbtdata(nbtdata_line) -> dict:
 
   return nbtdata
 
+def generate_message_dict(raw_nbtdata, my_email):
+  """Generate message dict from raw nbt-data.  This message dict will
+  be used in a loop to send out notification emails to each recipients.
+  """
+
+  d = {'chalohuan@example.com' : '- server under maintenance\n' + \
+    '- Aug 4 - Aug 7, 30 people'}
+
+  return d
+
 def run():
   """
   myself = ['a@example.com', 'b@example.org']
