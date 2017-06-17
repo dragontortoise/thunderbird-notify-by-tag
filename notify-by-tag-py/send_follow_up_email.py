@@ -20,7 +20,13 @@ def grep_emails(input_string):
   # gs-from-large-document
   return re.findall(r'[\w\.-]+@[\w\.-]+', input_string)
 
-def parsenbtdata(nbtdata_line):
+def parsenbtdata(nbtdata_line) -> dict:
+  """Returns dict with the following keys:
+    - subject : email subject
+    - author : the author of that email
+    - recipients : the recipients in the 'to' field of that email
+  """
+
   nbtdata = json.loads(nbtdata_line)
 
   return nbtdata
