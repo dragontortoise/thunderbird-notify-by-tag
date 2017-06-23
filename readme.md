@@ -1,20 +1,22 @@
 vim: syntax=markdown
 
-Project Name: thunderbird-notify-by-tag
+Project Name: thunderbird-send-follow-up-emails
 
-Thunderbird Extension Name: notify-by-tag
+Thunderbird Extension Name: send-follow-up-emails
 
 # Purpose
 
 I need a simple way to send folllow up emails to my colleagues at work.
 
 Here is the situation.  I send emails to my colleagues which I expect
-them to reply me.  I wait long enough until I feel it is too long.
-I then decide to send each of them a follow up email.  I do not want to
-send follow up email to them by replying to the existing email as that
-will link my follow up email to the existing email.  Linking them
-results in too many unnecessary items in the conversation tree in
-Thunderbird as you can see from the following ascii picture:
+them to reply me.  I tag (using Thunderbird's tag function) each sent
+email with my custom 'Expecting Reply' tag.  I wait long enough until I
+feel it is time to follow up.  I then decide to send each of them a
+follow up email.  I do not want to send follow up email to them by
+replying to the existing sent email as that will link my follow up email
+to the existing email.  Linking them results in too many unnecessary
+items in the conversation tree view in Thunderbird as you can see from
+the following ascii picture:
 
 ~~~
 Some Email
@@ -33,8 +35,6 @@ Some Email
                                |- Re: Some Email
                                |- Re: Some Email
 ~~~
-
-I think follow up email should not be in the conversation tree.
 
 For each sent email I expect to be replied, I manually tag them with a
 custom tag I created, 'Expecting Reply'.  I then have a Saved Search
@@ -82,61 +82,60 @@ Email Content:
 ~~~
 
 Each of the recipients who receives my follow up email will search from
-the email subject I give and sort the result by date in descending
+the email subject I provide and sort the result by date in descending
 order.  The newest one is the supposed email they should give me a
-reply.
+reply.  (Or they might use other way as this depends on how they use
+their email, e.g. they might tag these emails and they should search
+from the tagged emails instead.)
 
-This project, *thunderbird-notify-by-tag*, is to save your time on the
-following steps:
+This project, *thunderbird-send-follow-up-emails*, is to save your time
+on the following steps:
 
 - Writing down what you want to follow up in vi.
 - Sending email with email subject list from vi to each person.
 
-With *thunderbird-notify-by-tag*, when you go through each email in the
-'Expecting Reply' Saved Search Folder, you just press the key,
+With *thunderbird-send-follow-up-emails*, when you go through each email
+in the 'Expecting Reply' Saved Search Folder, you just press the key,
 'alt+t, n' ('alt+t', release all keys, 'n'), and the program will save
-each email subject together with email address of the person whom you
+each email subject together with email addresses of the persons whom you
 want to send the follow up email to into a data file.  Once you are done
-with selecting emails, you then execute a Python script come with this
+with selecting emails, you then execute a Python script provided by this
 project which will send follow up emails based on the data in the
 generated data file.
 
 Flow of data:
 
 ~~~
-Thunderbird -> ~/tmp/nbt-data -> Python Script
+Thunderbird -> ~/tmp/sfue-data -> Python Script
 ~~~
 
 # History
 
-*thunderbird-notify-by-tag* or *notify-by-tag* might not be a good name
-for now as I do not seem to code anything related to Tag anymore.  But
-I will keep it as is as if we take into account the sample workflow
-I introduce, it is actually related to the 'Expecting Reply' custom tag.
-
 Initially when I started this project, I wanted to developed a
-Thunderbird Add-On which would send follow up emails for each email which
-has the specified tag if is left unanswered for at least the specified
-number of days.  It was a pain for me to find out how to develop add-on
-in Thunderbird with JavaScript.  I am new to JavaScript and the whole
-JavaScript environments.  I found it was very difficult to find
-documentations and howtos to develop such things I wanted with
+Thunderbird Add-On which would send follow up emails for each email
+which has the specified tag if is left unanswered for at least the
+specified number of days.  It was a pain for me to find out how to
+develop add-on in Thunderbird with JavaScript.  I am new to JavaScript
+and the whole JavaScript environments.  I found it was very difficult to
+find documentations and howtos to develop such things I wanted with
 Thunderbird.  It was more like trial-and-error instead of the preferred
 way which were to read proper textbooks and start coding.  At the end, I
 was able to use Gloda to search all emails matchiing the specified tag.
 But, unfortunately, there were some errors i.e. some emails which did
 not have that tag also came up in the search result.  I then decided to
 give up.  And here comes my new approach which does not have coding
-related to the tag.
+related to the tag.  I just use minimal JavaScript code to export data
+from Thunderbird into file and then use external Python script for the
+rest of the works.
 
 # Source Code File Structure Explanation
 
 - readme.md : The readme file you are reading right now.
 
-- notify-by-tag&#64;dragon.tortoise/ : This directory is created and named
-  according to Thunderbird Extension.  I name the extension as
-  "notify-by-tag".  And I have to put my First Name and Last Name in
-  this format "project-name@first\_name.last\_name".
+- send-follow-up-emails&#64;dragon.tortoise/ : This directory is created
+  and named according to Thunderbird Extension.  I name the extension as
+  "send-follow-up-emails".  And I have to put my First Name and Last
+  Name in this format "project-name@first\_name.last\_name".
 
   - install.rdf : File required by Thunderbird Extension.  It is used
     for the extension installation process.
@@ -148,16 +147,16 @@ related to the tag.
     content : is a separated normal GUI component or JavaScript file.
 
     overlay : is a modification/addition to Thunderbird's existing GUI
-      components.  E.g. tools_menu.xul is for adding "notify-by-tag"
-      menu item to Thunderbird's Tools menu.
+      components.  E.g. tools_menu.xul is for adding
+      "send-follow-up-emails" menu item to Thunderbird's Tools menu.
 
   - chrome/ : This directory contains all the GUI (XUL) files and
     Program Logic (JavaScript) files.
 
-    - content/notify-by-tag.js : Our JavaScript main JavaScript code is
-      here.
-    - content/tools\_menu.xul : GUI definition for the 'notify-by-tag'
-      menu item under Tools menu.
+    - content/send-follow-up-emails.js : Our JavaScript main JavaScript
+      code is here.
+    - content/tools\_menu.xul : GUI definition for the
+      'send-follow-up-emails' menu item under Tools menu.
 
 # Install
 
@@ -168,7 +167,8 @@ I will show you a simple way in Linux.
 % cd
 % mkdir project
 % cd project
-% git clone git@github.com:dragontortoise/thunderbird-notify-by-tag.git
+% git clone \
+  git@github.com:dragontortoise/thunderbird-send-follow-up-emails.git
 ~~~
 
 Assuming your Thunderbird Profile directory is:
@@ -177,25 +177,23 @@ Assuming your Thunderbird Profile directory is:
 
 ~~~
 % pushd ~/.thunderbird/sihe8lo0.default/extensions/
-% cat > notify-by-tag@dragon.tortoise
-~/project/thunderbird-notify-by-tag/notify-by-tag@dragon.tortoise
-% popd
+% cat > send-follow-up-emails@dragon.tortoise
+~/project/thunderbird-send-follow-up-emails/send-follow-up-emails@dragon.tortoise
+% echo -n "~/project/thunderbird-send-follow-up-emails" \
+  >> send-follow-up-emails@dragon.tortoise
+% echo -n "/send-follow-up-emails@dragon.tortoise" \
+  >> send-follow-up-emails@dragon.tortoise
 ~~~
 
 Open Thunderbird and you are ready!  You should notice
-thunderbird-notify-by-tag from Tools menu (Tools -> notify-by-tag).
-
-FIXME
-
-# Usage
+thunderbird-send-follow-up-emails from Tools menu (Tools ->
+send-follow-up-emails).
 
 # Environment I test my software with
 
-- Ubuntu 14.04.5 LTS
-- Thunderbird 45.5.1
-- Python 3.4.3
-
-FIXME
+- Debian 9.0
+- Thunderbird 45.8.0
+- Python 3.4.2
 
 # Other Follow Up solutions
 
