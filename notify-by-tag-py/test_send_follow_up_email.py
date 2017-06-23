@@ -32,7 +32,8 @@ class TestSendFollwUpEmail(unittest.TestCase):
       ['hello@example.com', 'worl.d@example.local'])
 
   def test_can_parse_nbtdata(self):
-    """parse each line of nbt_data into a python data structure
+    """parse each line of nbt_data into a python dictionary with keys:
+    'subject', 'author' and 'recipeints'
     """
 
     nbtdata_lines = self.get_sample_raw_nbtdata_str().split('\n')

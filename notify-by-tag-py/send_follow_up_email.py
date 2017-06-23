@@ -1,5 +1,27 @@
 #!/usr/bin/env python3
 
+"""
+notify-by-tag thunderbird addon generates data to nbt-data file.  Each
+line in it is in JSON format: 
+
+  {"subject":"the subject", "author":"email address of the author",
+  "recipients":"email addresses in the 'to' field"}
+
+  (without new line charactor)
+
+Each line is the extracted data from each email that you want to send a
+follow up email to related people.
+
+This script reads it, and generates a Python dict which its keys are
+each email address found in 'author' or 'recipients' except an email
+address which is your email address (you wouldn't send the follow up
+email to yourself, would you?).  And its values are list of email
+subjects to be followed up.
+
+Then, it iterates through the dict and send follow up email to each
+person.
+"""
+
 # We use json as a mean to pass data from Thunderbird Addon to Python.
 import json
 
