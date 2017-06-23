@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 
 """
-notify-by-tag thunderbird addon generates data to nbt-data file.  Each
-line in it is in JSON format: 
+send-follow-up-emails thunderbird addon generates data to sfue-data
+file.  Each line in it is in JSON format: 
 
   {"subject":"the subject", "author":"email address of the author",
   "recipients":"email addresses in the 'to' field"}
@@ -42,19 +42,19 @@ def grep_emails(input_string):
   # gs-from-large-document
   return re.findall(r'[\w\.-]+@[\w\.-]+', input_string)
 
-def parsenbtdata(nbtdata_line) -> dict:
+def parsesfuedata(sfuedata_line) -> dict:
   """Returns dict with the following keys:
     - subject : email subject
     - author : the author of that email
     - recipients : the recipients in the 'to' field of that email
   """
 
-  nbtdata = json.loads(nbtdata_line)
+  sfuedata = json.loads(sfuedata_line)
 
-  return nbtdata
+  return sfuedata
 
-def generate_message_dict(raw_nbtdata, my_email):
-  """Generate message dict from raw nbt-data.  This message dict will
+def generate_message_dict(raw_sfuedata, my_email):
+  """Generate message dict from raw sfue-data.  This message dict will
   be used in a loop to send out notification emails to each recipients.
   """
 
@@ -72,8 +72,8 @@ def run():
   #   value as a list of email subjects.
   to_notify = {}
 
-  # Load JSON data from ~/tmp/nbt-data .
-  # File format of nbt-data is:
+  # Load JSON data from ~/tmp/sfue-data .
+  # File format of sfue-data is:
   # 
   #   {"subject": "<a_subject>", "author":"<an_author">,
   #    "recipients":"<a_list_of_recipients>"}
