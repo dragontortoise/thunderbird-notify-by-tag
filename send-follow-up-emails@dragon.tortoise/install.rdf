@@ -4,11 +4,11 @@
      xmlns:em="http://www.mozilla.org/2004/em-rdf#">
 
   <Description about="urn:mozilla:install-manifest">
-    <em:id>notify-by-tag@dragon.tortoise</em:id>
-    <em:name>notify-by-tag</em:name>
+    <em:id>send-follow-up-emails@dragon.tortoise</em:id>
+    <em:name>send-follow-up-emails</em:name>
     <em:version>1.0</em:version>
     <em:creator>dragontortoise</em:creator>
-    <em:homepageURL>https://github.com/dragontortoise/thunderbird-notify-by-tag</em:homepageURL>
+    <em:homepageURL>https://github.com/dragontortoise/thunderbird-send-follow-up-emails</em:homepageURL>
    
     <em:targetApplication>
       <Description>

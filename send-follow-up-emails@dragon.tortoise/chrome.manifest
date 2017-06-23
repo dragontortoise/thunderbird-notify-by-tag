@@ -1,2 +1,2 @@
-content notify-by-tag chrome/content/
-overlay chrome://messenger/content/messenger.xul chrome://notify-by-tag/content/tools_menu.xul
+content send-follow-up-emails chrome/content/
+overlay chrome://messenger/content/messenger.xul chrome://send-follow-up-emails/content/tools_menu.xul

@@ -1,6 +1,6 @@
 /*
- * I don't know how to use namespace in JavaScript.  Let's use "nbt" as
- * a prefix for each function.  "nbt" stands for Notify By Tag.
+ * I don't know how to use namespace in JavaScript.  Let's use "sfue" as
+ * a prefix for each function.  "sfue" stands for Send Follw Up Emails
  */
  
 // [begin] Import statements.
@@ -23,9 +23,9 @@ let consoleService = Components.classes["@mozilla.org/consoleservice;1"]
 // References:
 //   - http://geekswithblogs.net/svanvliet/archive/2006/03/23/simple-ja
 //     vascript-object-dump-function.aspx
-let NBT_MAX_DUMP_DEPTH = 10;
-function nbt_dumpObj(obj, name, indent, depth) {
-  if (depth > NBT_MAX_DUMP_DEPTH) {
+let SFUE_MAX_DUMP_DEPTH = 10;
+function sfue_dumpObj(obj, name, indent, depth) {
+  if (depth > SFUE_MAX_DUMP_DEPTH) {
     return indent + name + ": <Maximum Depth Reached>\n";
   }
 
@@ -61,7 +61,7 @@ function nbt_dumpObj(obj, name, indent, depth) {
  * All JSON objects in text representation are separated by newline
  * character.
  */
-function nbt_run() {
+function sfue_run() {
   // Get data from the current selected message.
   let selectednsIMsgDBHdr = gFolderDisplay.selectedMessage;
   // Use JSON format.
@@ -83,7 +83,7 @@ function nbt_run() {
   // This encoder can be reused for several writes.
   let encoder = new TextEncoder();  
 
-  let file = "/home/debian/tmp/nbt-data";
+  let file = "/home/debian/tmp/sfue-data";
   OS.File.open(file, {write: true, append: true}).then(valOpen => {
     consoleService.logStringMessage('valOpen:', valOpen);
     let txtEncoded = new TextEncoder().encode(dataTxt + '\n');

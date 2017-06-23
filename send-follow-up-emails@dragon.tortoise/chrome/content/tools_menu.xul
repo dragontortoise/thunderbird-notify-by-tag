@@ -2,12 +2,12 @@
 <overlay id="tools_menu" 
 xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
   <script type="application/javascript"
-    src="chrome://notify-by-tag/content/notify-by-tag.js" />
+    src="chrome://send-follow-up-emails/content/send-follow-up-emails.js" />
 
   <menupopup id="taskPopup">
-    <menuitem id="notify-by-tag-menuItem"
-      oncommand="nbt_run()"
-      label="notify-by-tag" accesskey="n" />
+    <menuitem id="send-follow-up-emails-menuItem"
+      oncommand="sfue_run()"
+      label="send-follow-up-emails" accesskey="n" />
   </menupopup>
 
 </overlay>
